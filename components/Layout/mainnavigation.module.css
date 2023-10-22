@@ -1,6 +1,6 @@
 .navBar {
     width: 5rem;
-    height: 35rem;
+    height: 40rem;
     background-color: var(--navy);
     border-radius: var(--border-radius);
     padding: 1em;
@@ -23,5 +23,14 @@
 }
 
 .logo {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+}
+
+.navItem {
+    margin-bottom: 1.5em;
+}
+
+.user { 
+    border: 1px solid white;
+    border-radius: 50%;
 }

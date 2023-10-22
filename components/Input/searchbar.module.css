@@ -1,0 +1,32 @@
+.searchContainer {
+    position: relative;
+}
+
+.search {
+    display: flex;
+    height: 2em;
+}
+
+.searchBar {
+    padding-left: 3rem;
+    width: 100%;
+    background-color: var(--dark-navy);
+    border: none;
+    outline: none;
+}
+
+.searchBar:focus {
+    color: var(--white);
+}
+
+.searchBar:active, .searchBar:focus-within {
+    border-bottom: 1px solid var(--soft-blue);
+    outline: none;
+}
+
+.icon {
+    position: absolute;
+    padding-left: 5px;
+    top: 0;
+    bottom: 0;
+}

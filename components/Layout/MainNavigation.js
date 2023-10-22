@@ -14,24 +14,26 @@ const MainNavigation = () => {
           <li className={classes.logo}>
             <IconLogo />
           </li>
-          <li>
+          <li className={classes.navItem}>
             <IconNavHome />
           </li>
-          <li>
+          <li className={classes.navItem}>
             <IconNavMovies />
           </li>
-          <li>
+          <li className={classes.navItem}>
             <IconNavTVSeries />
           </li>
-          <li>
+          <li className={classes.navItem}>
             <IconNavBookmark />
           </li>
         </div>
         <div>
           <Image
-            src={"/movie-app/assets/image-avatar.png"}
-            width={40}
-            height={40}
+            src={"/image-avatar.png"}
+            alt="Photo of user"
+            width={35}
+            height={35}
+            className={classes.user}
           />
         </div>
       </ul>
