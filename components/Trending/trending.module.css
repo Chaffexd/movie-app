@@ -1,0 +1,20 @@
+.heading {
+    font-size: var(--large-heading);
+    margin-bottom: 1rem;
+}
+
+.trendingTopContainer {
+    max-width: 100%;
+    display: block;
+}
+
+.trendingMoviesContainer {
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 15em;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}

@@ -1,10 +1,12 @@
 .searchContainer {
     position: relative;
+    margin-bottom: 1rem;
 }
 
 .search {
     display: flex;
-    height: 2em;
+    height: 3em;
+    align-items: center;
 }
 
 .searchBar {
@@ -13,6 +15,7 @@
     background-color: var(--dark-navy);
     border: none;
     outline: none;
+    height: 100%;
 }
 
 .searchBar:focus {
@@ -22,11 +25,9 @@
 .searchBar:active, .searchBar:focus-within {
     border-bottom: 1px solid var(--soft-blue);
     outline: none;
+    margin-bottom: -1px;
 }
 
 .icon {
     position: absolute;
-    padding-left: 5px;
-    top: 0;
-    bottom: 0;
 }
