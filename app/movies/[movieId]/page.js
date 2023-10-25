@@ -24,7 +24,7 @@ const MovieDetailPage = async ({ params }) => {
   const { movieId } = params;
 
   const movieData = await getMovieData(movieId);
-  const { title, overview, release_date, backdrop_path, poster_path, vote_average } =
+  const { title, overview, release_date, poster_path, vote_average } =
     movieData;
 
   return (
@@ -34,7 +34,6 @@ const MovieDetailPage = async ({ params }) => {
         title={title}
         description={overview}
         releaseDate={release_date}
-        backdropSource={backdrop_path}
         posterSource={poster_path}
         rating={vote_average}
       />

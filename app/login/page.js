@@ -1,5 +1,7 @@
+import Link from "next/link";
+
 const LoginPage = () => {
-  return <div>Login Page</div>;
+  return <Link href="/api/auth/login">Login</Link>;
 };
 
 export default LoginPage;
