@@ -11,7 +11,7 @@ const Movie = ({ alt, moviePoster, movieId }) => {
 
   return (
     <li className={classes.movieContainer}>
-      <Link href={`/movie/${movieId}`} className={classes.imageContainer}>
+      <Link href={`/movies/${movieId}`} className={classes.imageContainer}>
         <Image src={imageUrl} width={240} height={470} alt={alt} className={classes.moviePoster} />
       </Link>
     </li>

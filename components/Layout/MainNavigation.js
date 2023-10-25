@@ -5,27 +5,28 @@ import IconNavTVSeries from "@/assets/IconNavTVSeries";
 import IconNavBookmark from "@/assets/IconNavBookmark";
 import IconLogo from "@/assets/IconLogo";
 import Image from "next/image";
+import Link from "next/link";
 
 const MainNavigation = () => {
   return (
     <nav className={classes.navBar}>
       <ul className={classes.list}>
         <div className={classes.listItems}>
-          <li className={classes.logo}>
+          <Link href={"/"} className={classes.logo}>
             <IconLogo />
-          </li>
-          <li className={classes.navItem}>
+          </Link>
+          <Link href={"/"} className={classes.navItem}>
             <IconNavHome />
-          </li>
-          <li className={classes.navItem}>
+          </Link>
+          <Link href={"/movies"} className={classes.navItem}>
             <IconNavMovies />
-          </li>
-          <li className={classes.navItem}>
+          </Link>
+          <Link href={"/series"} className={classes.navItem}>
             <IconNavTVSeries />
-          </li>
-          <li className={classes.navItem}>
+          </Link>
+          <Link href={"/bookmarks"} className={classes.navItem}>
             <IconNavBookmark />
-          </li>
+          </Link>
         </div>
         <div>
           <Image
