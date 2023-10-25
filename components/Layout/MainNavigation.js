@@ -29,6 +29,7 @@ const MainNavigation = () => {
           </Link>
         </div>
         <div>
+          <Link href={"/login"}>
           <Image
             src={"/image-avatar.png"}
             alt="Photo of user"
@@ -36,6 +37,7 @@ const MainNavigation = () => {
             height={35}
             className={classes.user}
           />
+          </Link>
         </div>
       </ul>
     </nav>
