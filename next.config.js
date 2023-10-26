@@ -1,8 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['api.themoviedb.org', 'image.tmdb.org']
-    }
-}
+  images: {
+    domains: [
+      "api.themoviedb.org",
+      "image.tmdb.org",
+      "lh3.googleusercontent.com",
+    ],
+  },
+  webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
 
-module.exports = nextConfig
+      fs: false, // the solution
+    };
+    return config;
+  },
+};
+
+module.exports = nextConfig;

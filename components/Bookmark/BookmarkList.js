@@ -4,29 +4,34 @@ import { getMovieData } from "@/helpers/api-util";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { getBookmarks } from "@/helpers/firebase";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-import classes from './bookmarklist.module.css';
+import classes from "./bookmarklist.module.css";
 
 const BookmarkList = () => {
   const { bookmarkedMovies } = useBookmark();
   const [bookmarkedMovieData, setBookmarkedMovieData] = useState([]);
+  const { user } = useUser();
 
   useEffect(() => {
-    // this function will perform multiple fetches based on the IDs store from bookmarking
-    const fetchBookmarkData = async () => {
-      const movieDataPromises = bookmarkedMovies.map(async (movieId) => {
-        return await getMovieData(movieId);
-      });
-
-      // promise.all resolves all of the promises returned from movieDataPromises
-      const movieData = await Promise.all(movieDataPromises);
-
-      setBookmarkedMovieData(movieData);
+    const fetchBookmarks = async () => {
+      if (user && user.nickname) {
+        const userBookmarks = await getBookmarks(user.nickname);
+        if (userBookmarks) {
+          const bookMarksArray = Object.values(userBookmarks);
+          // Fetch movie data and update the state for user bookmarks
+          const movieDataPromises = bookMarksArray.map(async (movieId) => {
+            return await getMovieData(movieId);
+          });
+          const movieData = await Promise.all(movieDataPromises);
+          setBookmarkedMovieData(movieData);
+        }
+      }
     };
 
-    fetchBookmarkData();
-  }, [bookmarkedMovies]);
-  console.log(bookmarkedMovieData);
+    fetchBookmarks();
+  }, [user]);
 
   return (
     <div>
@@ -36,7 +41,12 @@ const BookmarkList = () => {
           {bookmarkedMovieData.map((movie) => (
             <li key={movie.id}>
               <Link href={`/movies/${movie.id}`}>
-                <Image src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={200} height={300} alt={movie.title} />
+                <Image
+                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                  width={200}
+                  height={300}
+                  alt={movie.title}
+                />
               </Link>
             </li>
           ))}
