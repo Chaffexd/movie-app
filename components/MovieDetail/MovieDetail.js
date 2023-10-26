@@ -4,6 +4,8 @@ import classes from "./moviedetail.module.css";
 import Bookmark from "../Bookmark/Bookmark";
 import { useBookmark } from "../../context/bookmarkContext";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect, useState } from "react";
+import { getBookmarks } from "@/helpers/firebase";
 
 const MovieDetail = ({
   title,
@@ -19,12 +21,34 @@ const MovieDetail = ({
   // this is my context, we have for adding, removing and keeping track of all of them
   const { bookmarkedMovies, addBookmark, removeBookmark } = useBookmark();
   // this will confirm wether a movie is bookmarked
-  const isBookmarked = bookmarkedMovies.includes(movieId);
+  // const isBookmarked = bookmarkedMovies.some((bookmark) => bookmark.movieId === movieId && bookmark.title === title);
+  // console.log(isBookmarked); // returns true for bookmarked item, false for not
   // this logs the context for a user
-  console.log(bookmarkedMovies);
 
   // this is to confirm if a user is logged in, if they are, it will show the bookmark icon
   const { user } = useUser();
+
+  // this is to initialise state
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  console.log(isBookmarked);
+
+  useEffect(() => {
+    if (user && user.nickname) {
+      const fetchUserBookmarks = async () => {
+        const userBookmarksObject = await getBookmarks(user.nickname);
+        // returns an object - console.log(userBookmarks)
+        if (userBookmarksObject) {
+          const userBookmarks = Object.values(userBookmarksObject);
+          const isMovieBookmarked = userBookmarks.some(
+            (bookmark) => bookmark.movieId === movieId
+          );
+          setIsBookmarked(isMovieBookmarked);
+        }
+      };
+
+      fetchUserBookmarks();
+    }
+  }, [user, movieId]);
 
   return (
     <div className={classes.movieDetailContainer}>
@@ -47,9 +71,11 @@ const MovieDetail = ({
             isBookmarked={isBookmarked}
             onToggle={() => {
               if (isBookmarked) {
-                removeBookmark(movieId);
+                removeBookmark(movieId, title);
+                setIsBookmarked(false);
               } else {
-                addBookmark(movieId);
+                addBookmark(movieId, title);
+                setIsBookmarked(true);
               }
             }}
           />

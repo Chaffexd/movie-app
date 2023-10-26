@@ -14,7 +14,7 @@ const database = getDatabase(app);
 
 export { database };
 
-export const addBookmark = async (userId, movieId, movieData) => {
+export const addBookmark = async (userId, movieId, title) => {
   const dbRef = ref(database);
   const bookmarksRef = child(dbRef, `bookmarks/${userId}`);
 
@@ -31,7 +31,7 @@ export const addBookmark = async (userId, movieId, movieData) => {
 
   const bookmark = {
     movieId,
-    title: movieData.title,
+    title,
   };
 
   try {

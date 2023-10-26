@@ -20,9 +20,10 @@ const BookmarkList = () => {
         const userBookmarks = await getBookmarks(user.nickname);
         if (userBookmarks) {
           const bookMarksArray = Object.values(userBookmarks);
+          console.log(bookMarksArray)
           // Fetch movie data and update the state for user bookmarks
           const movieDataPromises = bookMarksArray.map(async (movieId) => {
-            return await getMovieData(movieId);
+            return await getMovieData(movieId.movieId);
           });
           const movieData = await Promise.all(movieDataPromises);
           setBookmarkedMovieData(movieData);
@@ -34,7 +35,7 @@ const BookmarkList = () => {
   }, [user]);
 
   // bookmarkedMovieData is an object within the array
-  // console.log(`The user is: ${user.nickname}. Their bookmarks are: ${bookmarkedMovieData.map(movie => movie.title).join(', ')}`)
+  console.log(`The user is: ${user?.nickname}. Their bookmarks are: ${bookmarkedMovieData.map(movie => movie?.title).join(', ')}`)
 
   return (
     <div>
@@ -42,13 +43,13 @@ const BookmarkList = () => {
       {bookmarkedMovieData.length > 0 ? (
         <ul className={classes.bookmarkedMoviesContainer}>
           {bookmarkedMovieData.map((movie) => (
-            <li key={movie.id}>
-              <Link href={`/movies/${movie.id}`}>
+            <li key={movie?.id}>
+              <Link href={`/movies/${movie?.id}`}>
                 <Image
-                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
                   width={200}
                   height={300}
-                  alt={movie.title}
+                  alt={movie?.title}
                 />
               </Link>
             </li>

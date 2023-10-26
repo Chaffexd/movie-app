@@ -22,6 +22,7 @@ export async function generateStaticParams() {
 
 const MovieDetailPage = async ({ params }) => {
   const { movieId } = params;
+  console.log(movieId)
 
   const movieData = await getMovieData(movieId);
   const { title, overview, release_date, poster_path, vote_average } =

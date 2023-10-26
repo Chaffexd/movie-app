@@ -18,21 +18,27 @@ export function BookmarkProvider({ children }) {
     // confirms if user is logged in or not
     const { user } = useUser();
 
-    const addBookmark = async (movieId) => {
+    const addBookmark = async (movieId, title) => {
       // creates the user bookmark node at that path
         const bookmarksRef = ref(database, `users/${user.nickname}/bookmarks`);
         // pushes a bookmark to the above ref and which ID of the movie is bookmarked
-        const newBookmarkRef = push(bookmarksRef, movieId);
+        const newBookmarkRef = push(bookmarksRef, {
+          movieId: movieId,
+          movieTitle: title
+        });
 
         // Store the generated key in state
         setBookmarkKeys((prevKeys) => [...prevKeys, newBookmarkRef.key]);
         // adds new movie ID to the list of bookmarks
-        setBookmarkedMovies((prevBookmarks) => [...prevBookmarks, movieId]);
+        setBookmarkedMovies((prevBookmarks) => [...prevBookmarks, {
+          movieId,
+          title
+        }]);
     };
 
-    const removeBookmark = (movieId) => {
+    const removeBookmark = (movieId, title) => {
         // Find the index of the bookmark you want to remove
-        const index = bookmarkedMovies.indexOf(movieId);
+        const index = bookmarkedMovies.findIndex((bookmark) => bookmark.movieId === movieId && bookmark.title === title);
 
         if (index >= 0) {
             // Use the key to remove the specific bookmark
