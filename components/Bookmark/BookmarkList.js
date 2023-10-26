@@ -33,6 +33,9 @@ const BookmarkList = () => {
     fetchBookmarks();
   }, [user]);
 
+  // bookmarkedMovieData is an object within the array
+  // console.log(`The user is: ${user.nickname}. Their bookmarks are: ${bookmarkedMovieData.map(movie => movie.title).join(', ')}`)
+
   return (
     <div>
       <h2>Your bookmarks:</h2>

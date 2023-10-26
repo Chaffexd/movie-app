@@ -13,12 +13,17 @@ const MovieDetail = ({
   rating,
   movieId,
 }) => {
+  // this is to getch the movie poster
   const fullImageUrl = `https://image.tmdb.org/t/p/original/${posterSource}`;
 
+  // this is my context, we have for adding, removing and keeping track of all of them
   const { bookmarkedMovies, addBookmark, removeBookmark } = useBookmark();
+  // this will confirm wether a movie is bookmarked
   const isBookmarked = bookmarkedMovies.includes(movieId);
+  // this logs the context for a user
   console.log(bookmarkedMovies);
 
+  // this is to confirm if a user is logged in, if they are, it will show the bookmark icon
   const { user } = useUser();
 
   return (

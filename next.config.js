@@ -5,6 +5,7 @@ const nextConfig = {
       "api.themoviedb.org",
       "image.tmdb.org",
       "lh3.googleusercontent.com",
+      "s.gravatar.com",
     ],
   },
   webpack(config) {
