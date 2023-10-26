@@ -3,6 +3,10 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.title {
+.title, .bookmarkItem {
     margin-bottom: 1em;
+}
+
+.poster {
+    border-radius: var(--border-radius);
 }

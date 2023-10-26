@@ -1,37 +1,30 @@
 "use client";
 import Image from "next/image";
-import classes from "./moviedetail.module.css";
-import Bookmark from "../Bookmark/Bookmark";
-import { useBookmark } from "../../context/bookmarkContext";
+import classes from "../MovieDetail/moviedetail.module.css";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Bookmark from "../Bookmark/Bookmark";
+import { useBookmark } from "@/context/bookmarkContext";
 import { useEffect, useState } from "react";
 import { getBookmarks } from "@/helpers/firebase";
 
-const MovieDetail = ({
+const SeriesDetail = ({
   title,
   description,
   releaseDate,
   posterSource,
   rating,
-  movieId,
+  seriesId,
 }) => {
-  // this is to getch the movie poster
   const fullImageUrl = `https://image.tmdb.org/t/p/original/${posterSource}`;
-
-  // this is my context, we have for adding, removing and keeping track of all of them
-  const { bookmarkedMovies, addBookmark, removeBookmark } = useBookmark();
-  // this will confirm wether a movie is bookmarked
-  // const isBookmarked = bookmarkedMovies.some((bookmark) => bookmark.movieId === movieId && bookmark.title === title);
-  // console.log(isBookmarked); // returns true for bookmarked item, false for not
-  // this logs the context for a user
 
   // this is to confirm if a user is logged in, if they are, it will show the bookmark icon
   const { user } = useUser();
 
-  // this is to initialise state
+  // handle bookmarking for tv series
+  const { addBookmark, removeBookmark } = useBookmark();
   const [isBookmarked, setIsBookmarked] = useState(false);
-  console.log(isBookmarked);
 
+  // fetching users bookmarks
   useEffect(() => {
     if (user && user.nickname) {
       const fetchUserBookmarks = async () => {
@@ -40,7 +33,7 @@ const MovieDetail = ({
         if (userBookmarksObject) {
           const userBookmarks = Object.values(userBookmarksObject);
           const isMovieBookmarked = userBookmarks.some(
-            (bookmark) => bookmark.itemId === movieId
+            (bookmark) => bookmark.itemId === seriesId
           );
           setIsBookmarked(isMovieBookmarked);
         }
@@ -48,7 +41,7 @@ const MovieDetail = ({
 
       fetchUserBookmarks();
     }
-  }, [user, movieId]);
+  }, [user, seriesId]);
 
   return (
     <div className={classes.movieDetailContainer}>
@@ -71,10 +64,10 @@ const MovieDetail = ({
             isBookmarked={isBookmarked}
             onToggle={() => {
               if (isBookmarked) {
-                removeBookmark(movieId, title, "movie");
+                removeBookmark(seriesId, title, "series");
                 setIsBookmarked(false);
               } else {
-                addBookmark(movieId, title, "movie");
+                addBookmark(seriesId, title, "series");
                 setIsBookmarked(true);
               }
             }}
@@ -85,4 +78,4 @@ const MovieDetail = ({
   );
 };
 
-export default MovieDetail;
+export default SeriesDetail;

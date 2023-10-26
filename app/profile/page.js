@@ -18,7 +18,7 @@ const LoginPage = () => {
     />
   ) : (
     <>
-      <h1>Oops! Looks like you're not logged in.</h1>
+      <h1>Sign up today</h1>
       <Link href="/api/auth/login">Login</Link>
     </>
   );
