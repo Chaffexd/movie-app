@@ -32,5 +32,8 @@
 
 .user { 
     border: 1px solid white;
+    color: var(--white);
     border-radius: 50%;
+    height: 40px;
+    width: 40px;
 }

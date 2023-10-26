@@ -1,13 +1,12 @@
 import Movie from "./Movie";
 import classes from "./trending.module.css";
 
-const Trending = ({ trendingMovies }) => {
+const Trending = ({ trendingMovies, title }) => {
   const trendingMoviesResults = trendingMovies.results;
-  console.log(trendingMoviesResults)
 
   return (
     <div className={classes.trendingTopContainer}>
-      <h1 className={classes.heading}>Trending</h1>
+      <h1 className={classes.heading}>{title}</h1>
       <ul className={classes.trendingMoviesContainer}>
         {trendingMoviesResults.map((trendingMovie) => (
           <Movie

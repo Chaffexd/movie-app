@@ -10,13 +10,14 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import classes from "./bookmarklist.module.css";
 
 const BookmarkList = () => {
-  const { bookmarkedMovies } = useBookmark();
   const [bookmarkedMovieData, setBookmarkedMovieData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { user } = useUser();
 
   useEffect(() => {
     const fetchBookmarks = async () => {
       if (user && user.nickname) {
+        setLoading(true);
         const userBookmarks = await getBookmarks(user.nickname);
         if (userBookmarks) {
           const bookMarksArray = Object.values(userBookmarks);
@@ -28,6 +29,7 @@ const BookmarkList = () => {
           const movieData = await Promise.all(movieDataPromises);
           setBookmarkedMovieData(movieData);
         }
+        setLoading(false);
       }
     };
 
@@ -39,7 +41,8 @@ const BookmarkList = () => {
 
   return (
     <div>
-      <h2>Your bookmarks:</h2>
+      <h2 className={classes.title}>Your bookmarks:</h2>
+      {loading && <p>Loading bookmarks...</p>}
       {bookmarkedMovieData.length > 0 ? (
         <ul className={classes.bookmarkedMoviesContainer}>
           {bookmarkedMovieData.map((movie) => (

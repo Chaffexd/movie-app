@@ -1,4 +1,4 @@
-import Trending from "@/components/Trending/Trending"
+import Trending from "@/components/TrendingMovies/Trending"
 
 const MoviePage = ({ }) => {
   return (

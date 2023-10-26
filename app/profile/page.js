@@ -8,18 +8,20 @@ const LoginPage = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
-  
-  return (
-    user ? <ProfileClient 
+
+  return user ? (
+    <ProfileClient
       picture={user.picture}
       alt={user.name}
       name={user.name}
       email={user.email}
     />
-    :
-    <Link href="/api/auth/login">Login</Link>
-  )
-
+  ) : (
+    <>
+      <h1>Oops! Looks like you're not logged in.</h1>
+      <Link href="/api/auth/login">Login</Link>
+    </>
+  );
 };
 
 export default LoginPage;

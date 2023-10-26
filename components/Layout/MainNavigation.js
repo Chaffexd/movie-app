@@ -8,6 +8,7 @@ import IconLogo from "@/assets/IconLogo";
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import ProfileIcon from "@/assets/ProfileIcon";
 
 const MainNavigation = () => {
   const { user } = useUser();
@@ -35,7 +36,7 @@ const MainNavigation = () => {
           )}
         </div>
         <div>
-          <Link href={"/login"}>
+          <Link href={"/profile"}>
             {user ? (
               <Image
                 src={user.picture}
@@ -45,13 +46,7 @@ const MainNavigation = () => {
                 className={classes.user}
               />
             ) : (
-              <Image
-                src={"/image-avatar.png"}
-                alt="Photo of user"
-                width={35}
-                height={35}
-                className={classes.user}
-              />
+              <ProfileIcon />
             )}
           </Link>
         </div>
