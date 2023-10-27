@@ -3,6 +3,7 @@ import IconSearch from "@/assets/IconSearch";
 import classes from "./searchbar.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import { getAnyMovie, getAnySeries } from "@/helpers/api-util";
 
 const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
   const [query, setQuery] = useState("");
@@ -24,6 +25,28 @@ const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
     );
     // this combines both results
     setSuggestions([...filteredMovies, ...filteredTvSeries]);
+
+    if(filteredMovies.length === 0 && filteredTvSeries.length === 0) {
+      anySearch(input);
+    }
+
+  };
+
+  const anySearch = async (query) => {
+    const anyMovieData = await getAnyMovie(query);
+    const anyTvSeries = await getAnySeries(query);
+
+    const anyMovieArray = anyMovieData.results;
+    const anySeriesArray = anyTvSeries.results;
+    console.log(anySeriesArray)
+    console.log(anyMovieArray)
+
+    // combine the data
+    const combinedResults = [...anyMovieArray, ...anySeriesArray];
+
+    // make it available for the search bar
+    setSuggestions(combinedResults)
+    
   };
 
   const handleSuggestionClick = (suggestion) => {
