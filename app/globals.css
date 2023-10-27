@@ -42,10 +42,17 @@ body {
 }
 
 main {
-  padding: .6em 1em 1em 1em;
   width: 100%;
+  background-color: var(--navy);
+  border-radius: var(--border-radius);
+  margin-left: 1em;
 }
 
 h1, h2, h3, h4, p {
   color: var(--white);
+}
+
+.container {
+  padding: .5em 1em;
+  border-radius: var(--border-radius);
 }

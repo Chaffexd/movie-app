@@ -7,8 +7,8 @@ export default function ProfileClient({ picture, name, alt, email }) {
     <div>
       <Image src={picture} alt={alt} width={100} height={100} />
       <h2 className={classes.title}>{name}</h2>
-      <p>{email}</p>
-      <Link href="/api/auth/logout">Logout</Link>
+      <p className={classes.email}>{email}</p>
+      <Link href="/api/auth/logout" className={classes.logout}>Logout</Link>
     </div>
   );
 }

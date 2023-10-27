@@ -30,10 +30,34 @@
     margin-bottom: 1.5em;
 }
 
+.navItem:hover {
+    color: var(--white);
+}
+
 .user { 
     border: 1px solid white;
     color: var(--white);
     border-radius: 50%;
     height: 40px;
     width: 40px;
+}
+
+.login {
+    padding: 1rem;
+    display: block;
+    width: 8rem;
+    text-align: center;
+    background-color: var(--soft-blue);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--white);
+}
+
+.login:hover {
+    background-color: var(--navy);
+    transition: .1s ease-in;
+}
+
+.title {
+    margin-bottom: 2em;
 }

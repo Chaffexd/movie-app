@@ -1,9 +1,17 @@
-import Trending from "@/components/TrendingMovies/Trending"
+import TheatreNow from "@/components/TrendingMovies/TheatreNow";
+import { moviesInTheatres } from "@/helpers/api-util";
 
-const MoviePage = ({ }) => {
+const MoviePage = async ({}) => {
+  const movieData = await moviesInTheatres();
+
   return (
-    <>Hello</>
-  )
-}
+    <div className={"container"}>
+      <TheatreNow
+        title={"What's on in theatres right now?"}
+        movies={movieData}
+      />
+    </div>
+  );
+};
 
-export default MoviePage
+export default MoviePage;

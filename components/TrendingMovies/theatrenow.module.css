@@ -1,0 +1,11 @@
+.moviesContainer {
+    display: grid;
+    margin-top: 2em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: var(--large-heading);
+}

@@ -1,3 +1,20 @@
 .title {
     margin: .5em 0 .5em 0;
 }
+
+.email {
+    margin-bottom: 3rem;
+}
+
+.logout {
+    padding: 1rem;
+    background-color: var(--soft-blue);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--white);
+}
+
+.logout:hover {
+    background-color: var(--navy);
+    transition: .1s ease-in;
+}

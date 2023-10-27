@@ -41,27 +41,20 @@ const BookmarkList = () => {
   }, [user]);
 
   // bookmarkedMovieData is an object within the array
-  console.log(
-    `The user is: ${user?.nickname}. Their bookmarks are: ${bookmarkedData
-      .map((item) => item?.title)
-      .join(", ")}`
-  );
-
-  console.log(bookmarkedData)
   return (
     <div>
       <h2 className={classes.title}>Your bookmarks:</h2>
-      {loading && <p>Loading bookmarks...</p> }
+      {loading && <p>Loading bookmarks...</p>}
       {bookmarkedData.length > 0 && (
         <ul className={classes.bookmarkedMoviesContainer}>
           {bookmarkedData.map((item) => (
             <li key={item?.id} className={classes.bookmarkItem}>
-              <Link href={`/${item.seasons ? 'series' : 'movies'}/${item?.id}`}>
+              <Link href={`/${item.seasons ? "series" : "movies"}/${item?.id}`}>
                 <Image
                   src={`https://image.tmdb.org/t/p/original/${item?.poster_path}`}
                   width={200}
                   height={300}
-                  alt={item?.title}
+                  alt={item?.title || item?.name}
                   className={classes.poster}
                 />
               </Link>

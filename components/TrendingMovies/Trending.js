@@ -1,8 +1,8 @@
 import Movie from "./Movie";
 import classes from "./trending.module.css";
 
-const Trending = ({ trendingMovies, title }) => {
-  const trendingMoviesResults = trendingMovies.results;
+const Trending = ({ movies, title }) => {
+  const trendingMoviesResults = movies.results;
 
   return (
     <div className={classes.trendingTopContainer}>

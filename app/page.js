@@ -10,14 +10,13 @@ export default async function Home() {
   return (
     <>
       <SearchBar />
-      <Trending 
-        title={"Trending Movies"}
-        trendingMovies={trendingMovies}
-      />
-      <TrendingTV 
-        title={"Trending TV Series"}
-        trendingTVSeries={trendingTVSeries}
-      />
+      <div className="container">
+        <Trending title={"Trending Movies"} movies={trendingMovies} />
+        <TrendingTV
+          title={"Trending TV Series"}
+          trendingTVSeries={trendingTVSeries}
+        />
+      </div>
     </>
-  )
+  );
 }

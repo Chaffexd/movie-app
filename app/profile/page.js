@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import ProfileClient from "@/components/Profile/Profile";
+import Login from "@/components/Layout/Login";
 
 const LoginPage = () => {
   const { user, error, isLoading } = useUser();
@@ -17,10 +18,7 @@ const LoginPage = () => {
       email={user.email}
     />
   ) : (
-    <>
-      <h1>Sign up today</h1>
-      <Link href="/api/auth/login">Login</Link>
-    </>
+    <Login />
   );
 };
 

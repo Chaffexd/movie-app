@@ -25,7 +25,7 @@ const SeriesDetailPage = async ({ params }) => {
   // console.log(seriesId);
 
   const seriesData = await getSeriesData(seriesId);
-  console.log(seriesData);
+  // console.log(seriesData);
   const { name, overview, first_air_date, poster_path, vote_average } =
     seriesData;
 

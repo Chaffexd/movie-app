@@ -8,6 +8,9 @@ export async function getTrendingMovies() {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
       },
+      next: {
+        revalidate: 60,
+      },
     }
   )
     .then((response) => {
@@ -28,6 +31,9 @@ export async function getMovieData(movieId) {
       "Content-Type": "application/json",
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
+    },
+    next: {
+      revalidate: 60,
     },
   })
     .then((response) => {
@@ -51,6 +57,9 @@ export async function getTrendingTVSeries() {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
       },
+      next: {
+        revalidate: 60,
+      },
     }
   )
     .then((response) => {
@@ -71,6 +80,55 @@ export async function getSeriesData(seriesId) {
       "Content-Type": "application/json",
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
+    },
+    next: {
+      revalidate: 60,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export async function tvAiringToday() {
+  return fetch(`https://api.themoviedb.org/3/tv/airing_today`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
+    },
+    next: {
+      revalidate: 60,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export async function moviesInTheatres() {
+  return fetch(`https://api.themoviedb.org/3/movie/now_playing`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWMxZDk2ZGM5ZTMxNmNjNjNmNzMwZjhkMjQzNDUwNiIsInN1YiI6IjYyZjQxZWQ5YzVhZGE1MDA3YTlhNzI3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CKuWDRwXiziO9soolErwl_ThzEEBxyrH77bNGsRewXI",
+    },
+    next: {
+      revalidate: 60,
     },
   })
     .then((response) => {
