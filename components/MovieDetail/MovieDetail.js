@@ -30,11 +30,11 @@ const MovieDetail = ({
 
   // this is to initialise state
   const [isBookmarked, setIsBookmarked] = useState(false);
-  console.log(isBookmarked);
+  // console.log(isBookmarked);
   console.log(bookmarkedMovies)
 
   useEffect(() => {
-    console.log("Effect run if user")
+    console.log("Effect run if user session refresh or logs out and in")
     if (user && user.nickname) {
       const fetchUserBookmarks = async () => {
         const userBookmarksObject = await getBookmarks(user.nickname);
