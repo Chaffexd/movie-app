@@ -1,6 +1,7 @@
 .bookmarkedMoviesContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2.5em;
 }
 
 .title, .bookmarkItem {
@@ -9,4 +10,11 @@
 
 .poster {
     border-radius: var(--border-radius);
+}
+
+.container {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

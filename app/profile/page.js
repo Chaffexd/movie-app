@@ -11,14 +11,18 @@ const LoginPage = () => {
   if (error) return <div>{error.message}</div>;
 
   return user ? (
-    <ProfileClient
-      picture={user.picture}
-      alt={user.name}
-      name={user.name}
-      email={user.email}
-    />
+    <div className="profileBox">
+      <ProfileClient
+        picture={user.picture}
+        alt={user.name}
+        name={user.name}
+        email={user.email}
+      />
+    </div>
   ) : (
-    <Login />
+    <div className="profileBox">
+      <Login />
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
-import { createContext, useContext, useState } from "react";
-import { ref, push, remove } from "firebase/database";
+import { createContext, useContext, useState, useEffect } from "react";
+import { ref, push, remove, get } from "firebase/database";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { database } from "@/helpers/firebase";
 
@@ -36,16 +36,20 @@ export function BookmarkProvider({ children }) {
       {
         itemId,
         title,
-        type
+        type,
       },
     ]);
   };
 
-  const removeBookmark = (itemId, title) => {
+  const removeBookmark = (itemId, title, type) => {
     // Find the index of the bookmark you want to remove
     const index = bookmarkedMovies.findIndex(
-      (bookmark) => bookmark.itemId === itemId && bookmark.title === title
+      (bookmark) =>
+        bookmark.itemId === itemId &&
+        bookmark.title === title &&
+        bookmark.type === type
     );
+    console.log(index)
 
     if (index >= 0) {
       // Use the key to remove the specific bookmark
@@ -54,22 +58,50 @@ export function BookmarkProvider({ children }) {
         database,
         `users/${user.nickname}/bookmarks/${bookmarkKey}`
       );
-      remove(bookmarksRef);
+      console.log(bookmarksRef)
+      remove(bookmarksRef).then(() => {
+        setBookmarkKeys((prevKeys) => {
+          const newKeys = [...prevKeys];
+          newKeys.splice(index, 1);
+          return newKeys;
+        });
+
+        setBookmarkedMovies((prevBookmarks) => {
+          const newBookmarks = [...prevBookmarks];
+          newBookmarks.splice(index, 1);
+          return newBookmarks;
+        });
+      })
+      .catch((error) => {
+        console.error(`Error: ${error}`)
+      });
 
       // Update state to remove both the key and the movieId
-      setBookmarkKeys((prevKeys) => {
-        const newKeys = [...prevKeys];
-        newKeys.splice(index, 1);
-        return newKeys;
-      });
-
-      setBookmarkedMovies((prevBookmarks) => {
-        const newBookmarks = [...prevBookmarks];
-        newBookmarks.splice(index, 1);
-        return newBookmarks;
-      });
     }
   };
+
+  useEffect(() => {
+    if (user && user.nickname) {
+      const fetchUserBookmarks = async () => {
+        const userBookmarksRef = ref(database, `users/${user.nickname}/bookmarks`);
+        
+        // Fetch bookmarks from the database
+        const userBookmarksSnapshot = await get(userBookmarksRef);
+        const userBookmarksObject = userBookmarksSnapshot.val();
+
+        if (userBookmarksObject) {
+          const userBookmarks = Object.values(userBookmarksObject);
+          
+          // Update the state with fetched bookmarks
+          setBookmarkKeys(Object.keys(userBookmarksObject));
+          setBookmarkedMovies(userBookmarks);
+          console.log(userBookmarks)
+        }
+      };
+
+      fetchUserBookmarks();
+    }
+  }, [user]);
 
   return (
     <BookmarkContext.Provider

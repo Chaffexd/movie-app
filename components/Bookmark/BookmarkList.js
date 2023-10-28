@@ -41,8 +41,9 @@ const BookmarkList = () => {
   }, [user]);
 
   // bookmarkedMovieData is an object within the array
+
   return (
-    <div>
+    <div className={classes.container}>
       <h2 className={classes.title}>Your bookmarks:</h2>
       {loading && <p>Loading bookmarks...</p>}
       {bookmarkedData.length > 0 && (

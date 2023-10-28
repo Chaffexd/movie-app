@@ -58,7 +58,7 @@ const SeriesDetail = ({
         <h1 className={classes.title}>{title}</h1>
         <time className={classes.date}>Relase date: {releaseDate}</time>
         <p className={classes.description}>{description}</p>
-        <p>Rating: {rating} / 10</p>
+        <p>Rating: {rating.toFixed(1)} / 10</p>
         {user && (
           <Bookmark
             isBookmarked={isBookmarked}

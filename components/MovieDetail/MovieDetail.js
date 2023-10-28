@@ -31,11 +31,14 @@ const MovieDetail = ({
   // this is to initialise state
   const [isBookmarked, setIsBookmarked] = useState(false);
   console.log(isBookmarked);
+  console.log(bookmarkedMovies)
 
   useEffect(() => {
+    console.log("Effect run if user")
     if (user && user.nickname) {
       const fetchUserBookmarks = async () => {
         const userBookmarksObject = await getBookmarks(user.nickname);
+        console.log(userBookmarksObject)
         // returns an object - console.log(userBookmarks)
         if (userBookmarksObject) {
           const userBookmarks = Object.values(userBookmarksObject);
@@ -65,7 +68,7 @@ const MovieDetail = ({
         <h1 className={classes.title}>{title}</h1>
         <time className={classes.date}>Relase date: {releaseDate}</time>
         <p className={classes.description}>{description}</p>
-        <p>Rating: {rating} / 10</p>
+        <p>Rating: {rating.toFixed(1)} / 10</p>
         {user && (
           <Bookmark
             isBookmarked={isBookmarked}

@@ -56,3 +56,7 @@ h1, h2, h3, h4, p {
   padding: .5em 1em;
   border-radius: var(--border-radius);
 }
+
+.profileBox {
+  padding: 1em;
+}

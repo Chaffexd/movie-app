@@ -26,10 +26,9 @@ const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
     // this combines both results
     setSuggestions([...filteredMovies, ...filteredTvSeries]);
 
-    if(filteredMovies.length === 0 && filteredTvSeries.length === 0) {
+    if (filteredMovies.length === 0 && filteredTvSeries.length === 0) {
       anySearch(input);
     }
-
   };
 
   const anySearch = async (query) => {
@@ -38,25 +37,22 @@ const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
 
     const anyMovieArray = anyMovieData.results;
     const anySeriesArray = anyTvSeries.results;
-    console.log(anySeriesArray)
-    console.log(anyMovieArray)
 
     // combine the data
     const combinedResults = [...anyMovieArray, ...anySeriesArray];
 
     // make it available for the search bar
-    setSuggestions(combinedResults)
-    
+    setSuggestions(combinedResults);
   };
 
   const handleSuggestionClick = (suggestion) => {
-    console.log(`Selected: ${suggestion.title ? suggestion.title : suggestion.name}`);
+    console.log(
+      `Selected: ${suggestion.title ? suggestion.title : suggestion.name}`
+    );
 
     setSuggestions([]);
     setQuery("");
   };
-
-  console.log(suggestions)
 
   return (
     <div className={classes.searchContainer}>
@@ -75,22 +71,33 @@ const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
           onChange={handleInputChange}
         />
       </div>
-      {query && suggestions.length > 0 && (
-          <div className={classes.suggestionsContainer}>
+      {query && (
+        <div className={classes.suggestionsContainer}>
+          {suggestions.length > 0 ? (
             <ul className={classes.suggestionsList}>
               {suggestions.map((suggestion) => (
                 <li
                   key={suggestion.id}
                   onClick={() => handleSuggestionClick(suggestion)}
                 >
-                  <Link className={classes.link} href={`${ suggestion.title ? `/movies/${suggestion.id}` : `/series/${suggestion.id}` }`}>
-                  {suggestion.title || suggestion.name}
+                  <Link
+                    className={classes.link}
+                    href={`${
+                      suggestion.title
+                        ? `/movies/${suggestion.id}`
+                        : `/series/${suggestion.id}`
+                    }`}
+                  >
+                    {suggestion.title || suggestion.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-        )}
+          ) : (
+            <p className={classes.link}>No results found</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

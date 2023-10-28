@@ -16,6 +16,7 @@
     border: none;
     outline: none;
     height: 100%;
+    color: var(--white);
 }
 
 .searchBar:focus {
@@ -71,3 +72,7 @@
     color: var(--dark-navy);
   }
   
+
+  .iconMain:hover {
+    color: #d55f5f;
+  }
