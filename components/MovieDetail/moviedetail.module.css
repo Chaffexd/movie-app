@@ -29,3 +29,16 @@
     flex-direction: column;
     justify-content: center;
 }
+
+@media only screen and (max-width: 900px) {
+    .movieDetailContainer {
+        padding: 1em;
+    }
+    .imageContainer {
+        width: 45%;
+    }
+    .infoContainer {
+        width: 55%;
+        padding: 1em;
+    }
+}

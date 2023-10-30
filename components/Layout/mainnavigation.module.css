@@ -61,4 +61,36 @@
 
 .title {
     margin-bottom: 2em;
+    margin-top: 1em;
 }
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (max-width: 900px) {
+    .navBar {
+      width: 80%;
+      height: 4rem;
+      margin: 0 auto;
+    }
+    .list {
+        flex-direction: row;
+        
+    }
+    .listItems {
+        flex-direction: row;
+        width: 100%;
+    }
+    .logo, .navItem {
+        margin-bottom: 0;
+    }
+    .logo {
+        margin-right: 38%;
+    }
+    .navItem {
+        margin-right: 5%;
+    }
+  }

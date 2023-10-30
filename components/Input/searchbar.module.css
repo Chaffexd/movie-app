@@ -76,3 +76,9 @@
   .iconMain:hover {
     color: #d55f5f;
   }
+
+  @media only screen and (max-width: 900px) {
+    .search {
+      margin: .5em 0 .5em 0;
+    }
+  }
