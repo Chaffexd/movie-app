@@ -49,7 +49,6 @@ export function BookmarkProvider({ children }) {
         bookmark.title === title &&
         bookmark.type === type
     );
-    console.log(index)
 
     if (index >= 0) {
       // Use the key to remove the specific bookmark

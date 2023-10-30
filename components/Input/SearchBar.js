@@ -4,10 +4,12 @@ import classes from "./searchbar.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import { getAnyMovie, getAnySeries } from "@/helpers/api-util";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const debouncedSearchTerm = useDebounce(query, 4000);
 
   const movieArray = Object.values(trendingMovies);
   const seriesArray = Object.values(trendingTVSeries);
@@ -27,7 +29,9 @@ const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
     setSuggestions([...filteredMovies, ...filteredTvSeries]);
 
     if (filteredMovies.length === 0 && filteredTvSeries.length === 0) {
-      anySearch(input);
+      console.time('filter array API');
+      anySearch(debouncedSearchTerm);
+      console.timeEnd('filter array API');
     }
   };
 

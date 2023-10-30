@@ -32,10 +32,11 @@ const MovieDetail = ({
   const [isBookmarked, setIsBookmarked] = useState(false);
   // console.log(isBookmarked);
   console.log(bookmarkedMovies)
+  console.log("Initial render")
 
   useEffect(() => {
-    console.log("Effect run if user session refresh or logs out and in")
     if (user && user.nickname) {
+      console.log(`We have a user: ${user.nickname} - useEffect is happening`)
       const fetchUserBookmarks = async () => {
         const userBookmarksObject = await getBookmarks(user.nickname);
         console.log(userBookmarksObject)
@@ -52,6 +53,8 @@ const MovieDetail = ({
       fetchUserBookmarks();
     }
   }, [user, movieId]);
+
+  console.log("rendering end")
 
   return (
     <div className={classes.movieDetailContainer}>
