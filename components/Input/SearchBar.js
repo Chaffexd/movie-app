@@ -9,7 +9,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 const SearchBar = ({ trendingMovies, trendingTVSeries }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const debouncedSearchTerm = useDebounce(query, 4000);
+  const debouncedSearchTerm = useDebounce(query, 300);
 
   const movieArray = Object.values(trendingMovies);
   const seriesArray = Object.values(trendingTVSeries);
