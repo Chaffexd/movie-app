@@ -18,9 +18,11 @@ export function BookmarkProvider({ children }) {
   // confirms if user is logged in or not
   const { user } = useUser();
 
+  const sanitizedUsername = user?.nickname.replace(/[#$/\[\].]/g, '_');
+
   const addBookmark = async (itemId, title, type) => {
     // creates the user bookmark node at that path
-    const bookmarksRef = ref(database, `users/${user.nickname}/bookmarks`);
+    const bookmarksRef = ref(database, `users/${sanitizedUsername}/bookmarks`);
     // pushes a bookmark to the above ref and which ID of the movie is bookmarked
     const newBookmarkRef = push(bookmarksRef, {
       itemId: itemId,
@@ -55,7 +57,7 @@ export function BookmarkProvider({ children }) {
       const bookmarkKey = bookmarkKeys[index];
       const bookmarksRef = ref(
         database,
-        `users/${user.nickname}/bookmarks/${bookmarkKey}`
+        `users/${sanitizedUsername}/bookmarks/${bookmarkKey}`
       );
       console.log(bookmarksRef)
       remove(bookmarksRef).then(() => {
@@ -82,7 +84,7 @@ export function BookmarkProvider({ children }) {
   useEffect(() => {
     if (user && user.nickname) {
       const fetchUserBookmarks = async () => {
-        const userBookmarksRef = ref(database, `users/${user.nickname}/bookmarks`);
+        const userBookmarksRef = ref(database, `users/${sanitizedUsername}/bookmarks`);
         
         // Fetch bookmarks from the database
         const userBookmarksSnapshot = await get(userBookmarksRef);

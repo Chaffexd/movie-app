@@ -20,6 +20,8 @@ const SeriesDetail = ({
   // this is to confirm if a user is logged in, if they are, it will show the bookmark icon
   const { user } = useUser();
 
+  const sanitizedUsername = user?.nickname.replace(/[#$/\[\].]/g, '_');
+
   // handle bookmarking for tv series
   const { addBookmark, removeBookmark } = useBookmark();
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -28,7 +30,7 @@ const SeriesDetail = ({
   useEffect(() => {
     if (user && user.nickname) {
       const fetchUserBookmarks = async () => {
-        const userBookmarksObject = await getBookmarks(user.nickname);
+        const userBookmarksObject = await getBookmarks(sanitizedUsername);
         // returns an object - console.log(userBookmarks)
         if (userBookmarksObject) {
           const userBookmarks = Object.values(userBookmarksObject);

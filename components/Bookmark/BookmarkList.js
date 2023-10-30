@@ -13,10 +13,12 @@ const BookmarkList = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
 
+  const sanitizedUsername = user?.nickname.replace(/[#$/\[\].]/g, '_');
+
   useEffect(() => {
     const fetchBookmarks = async () => {
-      if (user && user.nickname) {
-        const userBookmarks = await getBookmarks(user.nickname);
+      if (user && sanitizedUsername) {
+        const userBookmarks = await getBookmarks(sanitizedUsername);
         if (userBookmarks) {
           setLoading(true);
           const bookMarksArray = Object.values(userBookmarks);

@@ -31,14 +31,15 @@ const MovieDetail = ({
   // this is to initialise state
   const [isBookmarked, setIsBookmarked] = useState(false);
   // console.log(isBookmarked);
-  console.log(bookmarkedMovies)
-  console.log("Initial render")
+  console.log(bookmarkedMovies);
+
+  const sanitizedUsername = user?.nickname.replace(/[#$/\[\].]/g, '_');
 
   useEffect(() => {
     if (user && user.nickname) {
-      console.log(`We have a user: ${user.nickname} - useEffect is happening`)
+      console.log(`We have a user: ${sanitizedUsername} - useEffect is happening`)
       const fetchUserBookmarks = async () => {
-        const userBookmarksObject = await getBookmarks(user.nickname);
+        const userBookmarksObject = await getBookmarks(sanitizedUsername);
         console.log(userBookmarksObject)
         // returns an object - console.log(userBookmarks)
         if (userBookmarksObject) {
